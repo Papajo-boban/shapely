@@ -18,48 +18,52 @@ Programming language: Python
 
 ### Your own coverage tool
 
-#### Levente Szabó
+#### 1. Levente Szabó
 
-**Function 1**: `version_from_parent_dir`
+* Function 1: `versiona_from_parent_dir`
 
-**Function 2**: `get_versions` 
+* Function 2: `get_versions` 
 
-**TODO: link commit**
+Commit [3f36a45](https://github.com/Papajo-boban/shapely/commit/3f36a4572a07c086d23f273623df349281e9176d) creates the CoverageTracker class, and commit [a7b54e6](https://github.com/Papajo-boban/shapely/commit/a7b54e625f1406bc9cb63f64b2b8b080ace2444c) instruments both functions. The coverage tool can be executed by running the `cov_info.sh` script located in the `shapely/cov_tracker_levi/` directory.
 
-The coverage tool can be executed by running the `cov_info.sh` script located in the `shapely/cov_tracker_levi/` directory.
+Coverage results:
 
-**Coverage results**:
-
-**TODO: add screetshot**
+<img width="426" alt="Screenshot 2024-06-08 at 17 32 05" src="https://github.com/Papajo-boban/shapely/assets/134519958/b9a489d6-374a-4526-959a-1bf6bcd0d99a">
 
 ## Coverage improvement
 
 ### Individual tests
 
-#### Levente Szabó
+#### 1. Levente Szabó
 
 >***Note:*** *I misunderstood and thought we had to write tests that cover all branches of the 2 chosen functions, that's why I created more than 2 tests.*
 
 **Test 1**: `test_versions_from_parentdir_success`, `test_versions_from_parentdir_fail`, `test_versions_from_parentdir_verbose`
 
-**TODO: link commit**
+Commit [f004d92](https://github.com/Papajo-boban/shapely/commit/f004d9242c0590f7a7f914dcec1f1a53c8bdd2b9) contains these changes.
 
 The coverage of this function improved from 0 to 100% as none of the function branches were covered by the existing tests.
 
 **Test 2**: `test_get_versions_name_error`, `test_get_versions_not_this_method`, `test_get_versions_parentdir_success`
 
-**TODO: link commit**
+Commit [e80fbc4](https://github.com/Papajo-boban/shapely/commit/e80fbc43450f6ead5a4e37aaae273e39492d7afe) contains these changes.
 
 The coverage of this function improved from 33% (40% according to coverage.py) to 100% as some of the exceptions and branches were not covered by the existing tests before. Specifically, the NameError exception, the second NotThisMethod exception, and the last try catch block and return statement were not covered as can be seen on the following screenshot from coverage.py:
 
-**TODO: add screenshot**
+<img width="462" alt="Screenshot 2024-06-08 at 19 06 38" src="https://github.com/Papajo-boban/shapely/assets/134519958/763bcf9e-07f2-4f72-8272-5662019f3464">
+
 
 The three test cases cover these branches.
 
 **Coverage results**
-**TODO: add screenshot**
 * Before
+ 
+  <img width="426" alt="Screenshot 2024-06-08 at 17 32 05" src="https://github.com/Papajo-boban/shapely/assets/134519958/b9a489d6-374a-4526-959a-1bf6bcd0d99a">
+  
 * After
+  
+  <img width="428" alt="Screenshot 2024-06-08 at 19 42 12" src="https://github.com/Papajo-boban/shapely/assets/134519958/1c3449f9-e1f1-4a99-bd04-c23210ae79c2">
+
 
 ### Overall
 
