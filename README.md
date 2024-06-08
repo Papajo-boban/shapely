@@ -14,12 +14,40 @@ Programming language: Python
 
 ### Existing tool - coverage.py
 
+The coverage tool executed on the project is [coverage.py](https://coverage.readthedocs.io/en/latest/index.html).
+
+The tool can be executed through the following steps (note that you need Python 3.x installed):
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/Papajo-boban/shapely.git
+cd shapely
+```
+2. **Create a virtual environment**
+```bash
+python3 -m venv .venv
+```
+3. **Activate virtual environment**
+```bash
+source .venv/bin/activate # for Unix/macOS
+.venv\Scripts\activate.bat # for windows
+```
+4. **Install project and test dependencies**
+```bash
+pip install -e .
+pip install pytest coverage matplotlib # matplotlib was needed as some tests were automatically skipped without it
+```
+5. **Run the tests using coverage.py**
+```bash
+coverage run -m pytest
+```
+6. **Create html coverage information and open it in your browser**
+```bash
+coverage html
+```
+7. **Result**
+
 <img width="1355" alt="Screenshot 2024-06-07 at 15 30 43" src="https://github.com/Papajo-boban/shapely/assets/134519958/f66d2f91-a251-4718-880d-c556f777512e">
-
-
-<Inform the name of the existing tool that was executed and how it was executed>
-
-<Show the coverage results provided by the existing tool with a screenshot>
 
 ### Your own coverage tool
 
