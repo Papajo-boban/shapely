@@ -53,7 +53,7 @@ coverage html
 
 #### 1. Levente Szabó
 
-* Function 1: `versiona_from_parent_dir`
+* Function 1: `versions_from_parent_dir`
 
 * Function 2: `get_versions` 
 
