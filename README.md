@@ -16,48 +16,50 @@ Programming language: Python
 
 <img width="1355" alt="Screenshot 2024-06-07 at 15 30 43" src="https://github.com/Papajo-boban/shapely/assets/134519958/f66d2f91-a251-4718-880d-c556f777512e">
 
-
-<Inform the name of the existing tool that was executed and how it was executed>
-
-<Show the coverage results provided by the existing tool with a screenshot>
-
 ### Your own coverage tool
 
-<The following is supposed to be repeated for each group member>
+#### Levente Szabó
 
-<Group member name>
+**Function 1**: `version_from_parent_dir`
 
-<Function 1 name>
+**Function 2**: `get_versions` 
 
-<Show a patch (diff) or a link to a commit made in your forked repository that shows the instrumented code to gather coverage measurements>
+**TODO: link commit**
 
-<Provide a screenshot of the coverage results output by the instrumentation>
+The coverage tool can be executed by running the `cov_info.sh` script located in the `shapely/cov_tracker_levi/` directory.
 
-<Function 2 name>
+**Coverage results**:
 
-<Provide the same kind of information provided for Function 1>
+**TODO: add screetshot**
 
 ## Coverage improvement
 
 ### Individual tests
 
-<The following is supposed to be repeated for each group member>
+#### Levente Szabó
 
-<Group member name>
+>***Note:*** *I misunderstood and thought we had to write tests that cover all branches of the 2 chosen functions, that's why I created more than 2 tests.*
 
-<Test 1>
+**Test 1**: `test_versions_from_parentdir_success`, `test_versions_from_parentdir_fail`, `test_versions_from_parentdir_verbose`
 
-<Show a patch (diff) or a link to a commit made in your forked repository that shows the new/enhanced test>
+**TODO: link commit**
 
-<Provide a screenshot of the old coverage results (the same as you already showed above)>
+The coverage of this function improved from 0 to 100% as none of the function branches were covered by the existing tests.
 
-<Provide a screenshot of the new coverage results>
+**Test 2**: `test_get_versions_name_error`, `test_get_versions_not_this_method`, `test_get_versions_parentdir_success`
 
-<State the coverage improvement with a number and elaborate on why the coverage is improved>
+**TODO: link commit**
 
-<Test 2>
+The coverage of this function improved from 33% (40% according to coverage.py) to 100% as some of the exceptions and branches were not covered by the existing tests before. Specifically, the NameError exception, the second NotThisMethod exception, and the last try catch block and return statement were not covered as can be seen on the following screenshot from coverage.py:
 
-<Provide the same kind of information provided for Test 1>
+**TODO: add screenshot**
+
+The three test cases cover these branches.
+
+**Coverage results**
+**TODO: add screenshot**
+* Before
+* After
 
 ### Overall
 
