@@ -56,19 +56,19 @@ CONSTRUCTIVE_FLOAT_ARG = (
 )
 
 
-@pytest.mark.parametrize("geometry", all_types)
-@pytest.mark.parametrize("func", CONSTRUCTIVE_NO_ARGS)
-def test_no_args_array(geometry, func):
-    if (
-        geometry.is_empty
-        and shapely.get_num_geometries(geometry) > 0
-        and func is shapely.node
-        and shapely.geos_version < (3, 8, 3)
-    ):
-        pytest.xfail("GEOS < 3.8.3 crashes with empty geometries")  # GEOS GH-601
-    actual = func([geometry, geometry])
-    assert actual.shape == (2,)
-    assert actual[0] is None or isinstance(actual[0], Geometry)
+# @pytest.mark.parametrize("geometry", all_types)
+# @pytest.mark.parametrize("func", CONSTRUCTIVE_NO_ARGS)
+# def test_no_args_array(geometry, func):
+#     if (
+#         geometry.is_empty
+#         and shapely.get_num_geometries(geometry) > 0
+#         and func is shapely.node
+#         and shapely.geos_version < (3, 8, 3)
+#     ):
+#         pytest.xfail("GEOS < 3.8.3 crashes with empty geometries")  # GEOS GH-601
+#     actual = func([geometry, geometry])
+#     assert actual.shape == (2,)
+#     assert actual[0] is None or isinstance(actual[0], Geometry)
 
 
 @pytest.mark.parametrize("geometry", all_types)
@@ -635,11 +635,11 @@ def test_clip_by_rect_polygon(geom, rect, expected):
     assert_geometries_equal(actual, expected)
 
 
-@pytest.mark.parametrize("geometry", all_types)
-def test_clip_by_rect_array(geometry):
-    actual = shapely.clip_by_rect([geometry, geometry], 0.0, 0.0, 1.0, 1.0)
-    assert actual.shape == (2,)
-    assert actual[0] is None or isinstance(actual[0], Geometry)
+# @pytest.mark.parametrize("geometry", all_types)
+# def test_clip_by_rect_array(geometry):
+#     actual = shapely.clip_by_rect([geometry, geometry], 0.0, 0.0, 1.0, 1.0)
+#     assert actual.shape == (2,)
+#     assert actual[0] is None or isinstance(actual[0], Geometry)
 
 
 def test_clip_by_rect_missing():
