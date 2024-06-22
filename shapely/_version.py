@@ -165,9 +165,9 @@ branch_coverage = {
     }
 
 def save_coverage():
-    with open("test_coverage.txt", "w") as file:
+    with open("/tmp/test_coverage.txt", "w") as file:
         for branch, hit in branch_coverage.items():
-            file.write(f"{branch}: {'hit' if hit else 'not hit'}\n")
+            file.write(f"{branch}: {'True' if hit else 'False'}\n")
 
 @register_vcs_handler("git", "get_keywords")
 def git_get_keywords(versionfile_abs):
