@@ -157,6 +157,28 @@ def versions_from_parentdir(parentdir_prefix, root, verbose):
     raise NotThisMethod("rootdir doesn't start with parentdir_prefix")
 
 
+branch_coverage = {
+    "git_get_keywords_1": False,  # if branch for git_refnames
+    "git_get_keywords_2": False,  # if branch for git_full
+    "git_get_keywords_3": False,   # if branch for git_date
+    "git_get_keywords_4": False,  # e if branch for mo in git_refnames
+    "git_get_keywords_5": False,   # if branch for mo in git_full
+    "git_get_keywords_6": False,   # if branch for mo in git_date
+    "git_get_keywords_7": False,   # if branch for except
+    "render_pep440_branch_1": False,  # if branch for closest-tag
+    "render_pep440_branch_2": False,  # if branch for distance or dirty
+    "render_pep440_branch_3": False,  # if branch for not master (inside closest-tag)
+    "render_pep440_branch_4": False,  # if branch for dirty (inside closest-tag)
+    "render_pep440_branch_5": False,  # else branch (exception #1)
+    "render_pep440_branch_6": False,  # if branch for not master (inside exception #1)
+    "render_pep440_branch_7": False   # if branch for dirty (inside exception #1)
+    }
+
+def save_coverage():
+    with open("/tmp/test_coverage.txt", "w") as file:
+        for branch, hit in branch_coverage.items():
+            file.write(f"{branch}: {'True' if hit else 'False'}\n")
+
 @register_vcs_handler("git", "get_keywords")
 def git_get_keywords(versionfile_abs):
     """Extract version information from the given file."""
@@ -169,20 +191,35 @@ def git_get_keywords(versionfile_abs):
         with open(versionfile_abs, "r") as fobj:
             for line in fobj:
                 if line.strip().startswith("git_refnames ="):
+                    branch_coverage["git_get_keywords_1"] = True
+                    save_coverage()
                     mo = re.search(r'=\s*"(.*)"', line)
                     if mo:
+                        branch_coverage["git_get_keywords_4"]=True
+                        save_coverage()
                         keywords["refnames"] = mo.group(1)
                 if line.strip().startswith("git_full ="):
+                    branch_coverage["git_get_keywords_2"] = True
+                    save_coverage()
                     mo = re.search(r'=\s*"(.*)"', line)
                     if mo:
+                        branch_coverage["git_get_keywords_5"]=True
+                        save_coverage()
                         keywords["full"] = mo.group(1)
                 if line.strip().startswith("git_date ="):
+                    branch_coverage["git_get_keywords_3"] = True
+                    save_coverage()
                     mo = re.search(r'=\s*"(.*)"', line)
                     if mo:
+                        branch_coverage["git_get_keywords_6"]=True
+                        save_coverage()
                         keywords["date"] = mo.group(1)
     except OSError:
+        branch_coverage["git_get_keywords_7"]=True
+        save_coverage()
         pass
     return keywords
+
 
 
 @register_vcs_handler("git", "keywords")
@@ -428,6 +465,7 @@ def render_pep440(pieces):
     return rendered
 
 
+
 def render_pep440_branch(pieces):
     """TAG[[.dev0]+DISTANCE.gHEX[.dirty]] .
 
@@ -438,21 +476,35 @@ def render_pep440_branch(pieces):
     1: no tags. 0[.dev0]+untagged.DISTANCE.gHEX[.dirty]
     """
     if pieces["closest-tag"]:
+        branch_coverage["render_pep440_branch_1"] = True
+        save_coverage()
         rendered = pieces["closest-tag"]
         if pieces["distance"] or pieces["dirty"]:
+            branch_coverage["render_pep440_branch_2"] = True
+            save_coverage()
             if pieces["branch"] != "master":
+                branch_coverage["render_pep440_branch_3"] = True
+                save_coverage()
                 rendered += ".dev0"
             rendered += plus_or_dot(pieces)
             rendered += "%d.g%s" % (pieces["distance"], pieces["short"])
             if pieces["dirty"]:
+                branch_coverage["render_pep440_branch_4"] = True
+                save_coverage()
                 rendered += ".dirty"
     else:
         # exception #1
+        branch_coverage["render_pep440_branch_5"] = True
+        save_coverage()
         rendered = "0"
         if pieces["branch"] != "master":
+            branch_coverage["render_pep440_branch_6"] = True
+            save_coverage()
             rendered += ".dev0"
         rendered += "+untagged.%d.g%s" % (pieces["distance"], pieces["short"])
         if pieces["dirty"]:
+            branch_coverage["render_pep440_branch_7"] = True
+            save_coverage()
             rendered += ".dirty"
     return rendered
 

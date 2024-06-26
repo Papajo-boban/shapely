@@ -69,10 +69,6 @@ Coverage results:
 
 * Function 2: `render_git_describe`
 
-
-#TBA
-
-
 ##### Coverage results:
 **Before:**
 
@@ -85,6 +81,19 @@ Coverage results:
 ![WhatsApp Image 2024-06-26 at 17 38 01_69392c7b](https://github.com/Papajo-boban/shapely/assets/90958223/032da83b-40a6-42d0-8051-bb198fe76319)
 
 
+#### 3. Barnabas Kalmar
+
+ Function 1: git_get_keywords
+ 
+ Function 2: render_pep440_branch
+
+ Coverage results:
+ 
+ ![alt text](<Screenshots/Screenshot 2024-06-22 155237.png>)
+ 
+ The coverage is 0 for both functions
+ 
+ 
 ## Coverage improvement
 
 ### Individual tests
@@ -141,6 +150,32 @@ The coverage of this function improved from 0 to 100% as none of the function br
 ![WhatsApp Image 2024-06-26 at 17 38 03_4a60e167](https://github.com/Papajo-boban/shapely/assets/90958223/25170918-d924-4d9d-8a59-cc16b10cd6df)
 ![WhatsApp Image 2024-06-26 at 17 38 01_69392c7b](https://github.com/Papajo-boban/shapely/assets/90958223/032da83b-40a6-42d0-8051-bb198fe76319)
 
+#### 3. Barnabas Kalmar
+
+Test 1 : test_git_get_keywords_all,test_git_get_keywords_none
+
+Test 2 :  test_render_pep440_branch_clean,test_render_pep440_branch_dirty, test_render_pep440_branch_no_tags_clean,
+ test_render_pep440_no_tags_dirty
+
+ 
+ Test 1
+
+ ![alt text](<Screenshots/Screenshot 2024-06-22 160350.png>)
+
+ Test 2
+
+ ![alt text](<Screenshots/Screenshot 2024-06-22 160417.png>)
+
+ Before:
+
+ ![alt text](<Screenshots/Screenshot 2024-06-22 155237.png>)
+
+ After:
+
+ ![alt text](<Screenshots/Screenshot 2024-06-22 143359.png>)
+
+  The coverage improved from 0 to 86% for both test functions
+
 
 ### Overall
 
@@ -152,4 +187,3 @@ The coverage of this function improved from 0 to 100% as none of the function br
 
 <Write what each group member did>
 Tomáš Schuster -
-
