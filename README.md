@@ -185,5 +185,8 @@ Test 2 :  test_render_pep440_branch_clean,test_render_pep440_branch_dirty, test_
 
 ## Statement of individual contributions
 
-<Write what each group member did>
-Tomáš Schuster -
+Tomáš Schuster - created repository, created tests for 2 functions from _version.py, filled in the readme, resolved merge conflicts, merged and reviewed pull requests 
+
+Levente Szabó - created tests for 2 functions from _version.py, filled in readme, resolved merge conflicts, merged and reviewed pull requests 
+
+Barney Kalmar - created tests for 2 functions _version.py, filled in README
