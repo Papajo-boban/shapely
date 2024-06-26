@@ -63,6 +63,28 @@ Coverage results:
 
 <img width="426" alt="Screenshot 2024-06-08 at 17 32 05" src="https://github.com/Papajo-boban/shapely/assets/134519958/b9a489d6-374a-4526-959a-1bf6bcd0d99a">
 
+#### 2. Tomáš Schuster
+
+* Function 1: `render`
+
+* Function 2: `render_git_describe`
+
+
+#TBA
+
+
+##### Coverage results:
+**Before:**
+
+![WhatsApp Image 2024-06-26 at 17 28 35_10d02054](https://github.com/Papajo-boban/shapely/assets/90958223/fe050b8e-1ba0-490b-a9ef-865581d58c40)
+![WhatsApp Image 2024-06-26 at 17 28 35_68d98447](https://github.com/Papajo-boban/shapely/assets/90958223/c1e31462-e783-4cf2-a036-0236d37f2dc6)
+
+**After:**
+
+![WhatsApp Image 2024-06-26 at 17 38 03_4a60e167](https://github.com/Papajo-boban/shapely/assets/90958223/25170918-d924-4d9d-8a59-cc16b10cd6df)
+![WhatsApp Image 2024-06-26 at 17 38 01_69392c7b](https://github.com/Papajo-boban/shapely/assets/90958223/032da83b-40a6-42d0-8051-bb198fe76319)
+
+
 ## Coverage improvement
 
 ### Individual tests
@@ -95,6 +117,30 @@ The three test cases cover these branches.
   
   <img width="428" alt="Screenshot 2024-06-08 at 19 42 12" src="https://github.com/Papajo-boban/shapely/assets/134519958/1c3449f9-e1f1-4a99-bd04-c23210ae79c2">
 
+#### 2. Tomáš Schuster
+
+**Test 1**: `test_render_with_error`, `test_render_default_style`, `test_render_pep440_style`,`test_render_pep440_branch_style`, `test_render_pep440_pre_style`, `test_render_pep440_post_style`, `test_render_pep440_post_branch_style`, `test_render_pep440_old_style`, `test_render_git_describe_style`, `test_render_git_describe_long_style`, `test_render_unknown_style`
+
+Commit [af388bc](https://github.com/shapely/shapely/commit/bf8b96e73c9e691b21ca25e8177f0640ffae0f8f) contains these changes.
+The coverage of this function improved from 17% to 100%
+
+**Test 2**:
+`test_tagged_version`,`test_untagged_version`,`test_dirty_tagged_version`,`test_dirty_untagged_version`,`test_no_distance_tagged_version`
+
+Commit [af388bc](https://github.com/shapely/shapely/commit/bf8b96e73c9e691b21ca25e8177f0640ffae0f8f) contains these changes.
+The coverage of this function improved from 0 to 100% as none of the function branches were covered by the existing tests.
+
+
+**Before:**
+
+![WhatsApp Image 2024-06-26 at 17 28 35_10d02054](https://github.com/Papajo-boban/shapely/assets/90958223/fe050b8e-1ba0-490b-a9ef-865581d58c40)
+![WhatsApp Image 2024-06-26 at 17 28 35_68d98447](https://github.com/Papajo-boban/shapely/assets/90958223/c1e31462-e783-4cf2-a036-0236d37f2dc6)
+
+**After:**
+
+![WhatsApp Image 2024-06-26 at 17 38 03_4a60e167](https://github.com/Papajo-boban/shapely/assets/90958223/25170918-d924-4d9d-8a59-cc16b10cd6df)
+![WhatsApp Image 2024-06-26 at 17 38 01_69392c7b](https://github.com/Papajo-boban/shapely/assets/90958223/032da83b-40a6-42d0-8051-bb198fe76319)
+
 
 ### Overall
 
@@ -105,3 +151,5 @@ The three test cases cover these branches.
 ## Statement of individual contributions
 
 <Write what each group member did>
+Tomáš Schuster -
+
