@@ -17,7 +17,9 @@ import re
 import subprocess
 import sys
 from typing import Callable, Dict
+from shapely.cov_tracker_levi import coverage_tracker
 
+coverage_tracker = coverage_tracker.CoverageTracker()
 
 def get_keywords():
     """Get the keywords needed to look up the version information."""
@@ -116,7 +118,7 @@ def run_command(commands, args, cwd=None, verbose=False, hide_stderr=False, env=
         return None, process.returncode
     return stdout, process.returncode
 
-
+coverage_tracker.add_coverage("versions_from_parentdir", 4)
 def versions_from_parentdir(parentdir_prefix, root, verbose):
     """Try to determine the version from the parent directory name.
 
@@ -124,11 +126,15 @@ def versions_from_parentdir(parentdir_prefix, root, verbose):
     the project name and a version string. We will also support searching up
     two directory levels for an appropriately named parent directory
     """
+    coverage_tracker.mark_branch("versions_from_parentdir", 0)
+
     rootdirs = []
 
     for _ in range(3):
         dirname = os.path.basename(root)
         if dirname.startswith(parentdir_prefix):
+            coverage_tracker.mark_branch("versions_from_parentdir", 1)
+
             return {
                 "version": dirname[len(parentdir_prefix) :],
                 "full-revisionid": None,
@@ -139,7 +145,11 @@ def versions_from_parentdir(parentdir_prefix, root, verbose):
         rootdirs.append(root)
         root = os.path.dirname(root)  # up a level
 
+    coverage_tracker.mark_branch("versions_from_parentdir", 2)
+
     if verbose:
+        coverage_tracker.mark_branch("versions_from_parentdir", 3)
+
         print(
             "Tried directories %s but none started with prefix %s"
             % (str(rootdirs), parentdir_prefix)
@@ -610,8 +620,16 @@ def render_pep440_old(pieces):
             rendered += ".dev0"
     return rendered
 
+render_git_describe_branches = [False] * 5
+def save_git_render_branches(render_git_describe_branches):
+    with open ("render_git_describe_coverage.txt", "w") as file:
+        for i in range(len(render_git_describe_branches)):
+            file.write(f"branch {i}: {render_git_describe_branches[i]}\n")
 
 def render_git_describe(pieces):
+    global render_git_describe_branches
+    render_git_describe_branches[0] = True
+    save_git_render_branches(render_git_describe_branches)
     """TAG[-DISTANCE-gHEX][-dirty].
 
     Like 'git describe --tags --dirty --always'.
@@ -620,15 +638,28 @@ def render_git_describe(pieces):
     1: no tags. HEX[-dirty]  (note: no 'g' prefix)
     """
     if pieces["closest-tag"]:
+        render_git_describe_branches[1] = True
+        save_git_render_branches(render_git_describe_branches)
         rendered = pieces["closest-tag"]
         if pieces["distance"]:
+            render_git_describe_branches[2] = True
+            save_git_render_branches(render_git_describe_branches)
+            save_render_branches
             rendered += "-%d-g%s" % (pieces["distance"], pieces["short"])
     else:
+        render_git_describe_branches[3] = True
+        save_git_render_branches(render_git_describe_branches)
+        save_render_branches
         # exception #1
         rendered = pieces["short"]
     if pieces["dirty"]:
+        render_git_describe_branches[4] = True
+        save_git_render_branches(render_git_describe_branches)
+        save_render_branches
         rendered += "-dirty"
     return rendered
+
+
 
 
 def render_git_describe_long(pieces):
@@ -650,10 +681,20 @@ def render_git_describe_long(pieces):
         rendered += "-dirty"
     return rendered
 
+render_branches = [False] * 12
+def save_render_branches(render_branches):
+    with open ("render_coverage.txt", "w") as file:
+        for i in range(len(render_branches)):
+            file.write(f"branch {i}: {render_branches[i]}\n")
 
 def render(pieces, style):
+    global render_branches
+    render_branches[0] = True
+    save_render_branches(render_branches)
     """Render the given version pieces into the requested style."""
     if pieces["error"]:
+        render_branches[1] = True
+        save_render_branches(render_branches)
         return {
             "version": "unknown",
             "full-revisionid": pieces.get("long"),
@@ -663,25 +704,45 @@ def render(pieces, style):
         }
 
     if not style or style == "default":
+        render_branches[2] = True
+        save_render_branches(render_branches)
         style = "pep440"  # the default
 
     if style == "pep440":
+        render_branches[3] = True
+        save_render_branches(render_branches)
         rendered = render_pep440(pieces)
     elif style == "pep440-branch":
+        render_branches[4] = True
+        save_render_branches(render_branches)
         rendered = render_pep440_branch(pieces)
     elif style == "pep440-pre":
+        render_branches[5] = True
+        save_render_branches(render_branches)
         rendered = render_pep440_pre(pieces)
     elif style == "pep440-post":
+        render_branches[6] = True
+        save_render_branches(render_branches)
         rendered = render_pep440_post(pieces)
     elif style == "pep440-post-branch":
+        render_branches[7] = True
+        save_render_branches(render_branches)
         rendered = render_pep440_post_branch(pieces)
     elif style == "pep440-old":
+        render_branches[8] = True
+        save_render_branches(render_branches)
         rendered = render_pep440_old(pieces)
     elif style == "git-describe":
+        render_branches[9] = True
+        save_render_branches(render_branches)
         rendered = render_git_describe(pieces)
     elif style == "git-describe-long":
+        render_branches[10] = True
+        save_render_branches(render_branches)
         rendered = render_git_describe_long(pieces)
     else:
+        render_branches[11] = True
+        save_render_branches(render_branches)
         raise ValueError("unknown style '%s'" % style)
 
     return {
@@ -692,13 +753,14 @@ def render(pieces, style):
         "date": pieces.get("date"),
     }
 
-
+coverage_tracker.add_coverage("get_versions", 6)
 def get_versions():
     """Get version information or return default if unable to do so."""
     # I am in _version.py, which lives at ROOT/VERSIONFILE_SOURCE. If we have
     # __file__, we can work backwards from there to the root. Some
     # py2exe/bbfreeze/non-CPython implementations don't do __file__, in which
     # case we can only use expanded keywords.
+    coverage_tracker.mark_branch("get_versions", 0)
 
     cfg = get_config()
     verbose = cfg.verbose
@@ -706,6 +768,7 @@ def get_versions():
     try:
         return git_versions_from_keywords(get_keywords(), cfg.tag_prefix, verbose)
     except NotThisMethod:
+        coverage_tracker.mark_branch("get_versions", 1)
         pass
 
     try:
@@ -716,6 +779,7 @@ def get_versions():
         for _ in cfg.versionfile_source.split("/"):
             root = os.path.dirname(root)
     except NameError:
+        coverage_tracker.mark_branch("get_versions", 2)
         return {
             "version": "0+unknown",
             "full-revisionid": None,
@@ -728,12 +792,15 @@ def get_versions():
         pieces = git_pieces_from_vcs(cfg.tag_prefix, root, verbose)
         return render(pieces, cfg.style)
     except NotThisMethod:
+        coverage_tracker.mark_branch("get_versions", 3)
         pass
 
     try:
         if cfg.parentdir_prefix:
+            coverage_tracker.mark_branch("get_versions", 4)
             return versions_from_parentdir(cfg.parentdir_prefix, root, verbose)
     except NotThisMethod:
+        coverage_tracker.mark_branch("get_versions", 5)
         pass
 
     return {
