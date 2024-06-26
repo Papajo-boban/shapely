@@ -69,8 +69,6 @@ Coverage results:
 
 #### 1. Levente Szabó
 
->***Note:*** *I misunderstood and thought we had to write tests that cover all branches of the 2 chosen functions, that's why I created more than 2 tests.*
-
 **Test 1**: `test_versions_from_parentdir_success`, `test_versions_from_parentdir_fail`, `test_versions_from_parentdir_verbose`
 
 Commit [f004d92](https://github.com/Papajo-boban/shapely/commit/f004d9242c0590f7a7f914dcec1f1a53c8bdd2b9) contains these changes.
