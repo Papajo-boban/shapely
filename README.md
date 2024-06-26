@@ -151,5 +151,6 @@ The coverage of this function improved from 0 to 100% as none of the function br
 ## Statement of individual contributions
 
 <Write what each group member did>
-Tomáš Schuster -
-
+Tomáš Schuster - created repository, created tests for 2 functions from _version.py, filled in the readme,
+Levi Szabó - created tests for 2 functions from _version.py, filled in readme, resolved merge conflicts, merged and reviewed pull requests
+Barney Kalmar - created tests for 2 functions _version.py, filled in README, 
