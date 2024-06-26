@@ -17,7 +17,9 @@ import re
 import subprocess
 import sys
 from typing import Callable, Dict
+from shapely.cov_tracker_levi import coverage_tracker
 
+coverage_tracker = coverage_tracker.CoverageTracker()
 
 def get_keywords():
     """Get the keywords needed to look up the version information."""
@@ -116,7 +118,7 @@ def run_command(commands, args, cwd=None, verbose=False, hide_stderr=False, env=
         return None, process.returncode
     return stdout, process.returncode
 
-
+coverage_tracker.add_coverage("versions_from_parentdir", 4)
 def versions_from_parentdir(parentdir_prefix, root, verbose):
     """Try to determine the version from the parent directory name.
 
@@ -124,11 +126,15 @@ def versions_from_parentdir(parentdir_prefix, root, verbose):
     the project name and a version string. We will also support searching up
     two directory levels for an appropriately named parent directory
     """
+    coverage_tracker.mark_branch("versions_from_parentdir", 0)
+
     rootdirs = []
 
     for _ in range(3):
         dirname = os.path.basename(root)
         if dirname.startswith(parentdir_prefix):
+            coverage_tracker.mark_branch("versions_from_parentdir", 1)
+
             return {
                 "version": dirname[len(parentdir_prefix) :],
                 "full-revisionid": None,
@@ -139,7 +145,11 @@ def versions_from_parentdir(parentdir_prefix, root, verbose):
         rootdirs.append(root)
         root = os.path.dirname(root)  # up a level
 
+    coverage_tracker.mark_branch("versions_from_parentdir", 2)
+
     if verbose:
+        coverage_tracker.mark_branch("versions_from_parentdir", 3)
+
         print(
             "Tried directories %s but none started with prefix %s"
             % (str(rootdirs), parentdir_prefix)
@@ -691,13 +701,14 @@ def render(pieces, style):
         "date": pieces.get("date"),
     }
 
-
+coverage_tracker.add_coverage("get_versions", 6)
 def get_versions():
     """Get version information or return default if unable to do so."""
     # I am in _version.py, which lives at ROOT/VERSIONFILE_SOURCE. If we have
     # __file__, we can work backwards from there to the root. Some
     # py2exe/bbfreeze/non-CPython implementations don't do __file__, in which
     # case we can only use expanded keywords.
+    coverage_tracker.mark_branch("get_versions", 0)
 
     cfg = get_config()
     verbose = cfg.verbose
@@ -705,6 +716,7 @@ def get_versions():
     try:
         return git_versions_from_keywords(get_keywords(), cfg.tag_prefix, verbose)
     except NotThisMethod:
+        coverage_tracker.mark_branch("get_versions", 1)
         pass
 
     try:
@@ -715,6 +727,7 @@ def get_versions():
         for _ in cfg.versionfile_source.split("/"):
             root = os.path.dirname(root)
     except NameError:
+        coverage_tracker.mark_branch("get_versions", 2)
         return {
             "version": "0+unknown",
             "full-revisionid": None,
@@ -727,12 +740,15 @@ def get_versions():
         pieces = git_pieces_from_vcs(cfg.tag_prefix, root, verbose)
         return render(pieces, cfg.style)
     except NotThisMethod:
+        coverage_tracker.mark_branch("get_versions", 3)
         pass
 
     try:
         if cfg.parentdir_prefix:
+            coverage_tracker.mark_branch("get_versions", 4)
             return versions_from_parentdir(cfg.parentdir_prefix, root, verbose)
     except NotThisMethod:
+        coverage_tracker.mark_branch("get_versions", 5)
         pass
 
     return {
