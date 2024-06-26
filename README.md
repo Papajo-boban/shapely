@@ -58,9 +58,6 @@ coverage html
 
  Coverage results:
  
- Test 1 : test_git_get_keywords_all,test_git_get_keywords_none
- Test 2 :  test_render_pep440_branch_clean,test_render_pep440_branch_dirty, test_render_pep440_branch_no_tags_clean,
- test_render_pep440_no_tags_dirty
 
  ![alt text](<Screenshots/Screenshot 2024-06-22 155237.png>)
  The coverage is 0 for both functions
@@ -70,15 +67,28 @@ coverage html
 ### Individual tests
 
 #### 3. Barnabas Kalmar
+
+Test 1 : test_git_get_keywords_all,test_git_get_keywords_none
+
+Test 2 :  test_render_pep440_branch_clean,test_render_pep440_branch_dirty, test_render_pep440_branch_no_tags_clean,
+ test_render_pep440_no_tags_dirty
+
  
  Test 1
+
  ![alt text](<Screenshots/Screenshot 2024-06-22 160350.png>)
+
  Test 2
+
  ![alt text](<Screenshots/Screenshot 2024-06-22 160417.png>)
 
- Before![alt text](<Screenshots/Screenshot 2024-06-22 155237.png>)
+ Before:
 
- After:![alt text](<Screenshots/Screenshot 2024-06-22 143359.png>)
+ ![alt text](<Screenshots/Screenshot 2024-06-22 155237.png>)
+
+ After:
+
+ ![alt text](<Screenshots/Screenshot 2024-06-22 143359.png>)
 
   The coverage improved from 0 to 86% for both test functions
 
