@@ -45,54 +45,41 @@ coverage run -m pytest
 ```bash
 coverage html
 ```
-7. **Result**
 
-<img width="1355" alt="Screenshot 2024-06-07 at 15 30 43" src="https://github.com/Papajo-boban/shapely/assets/134519958/f66d2f91-a251-4718-880d-c556f777512e">
+7. **Result**
 
 ### Your own coverage tool
 
-<The following is supposed to be repeated for each group member>
+#### 3. Barnabas Kalmar
 
-<Group member name>
+ Function 1: git_get_keywords
+ 
+ Function 2: render_pep440_branch
 
-<Function 1 name>
+ Coverage results:
+ 
+ Test 1 : test_git_get_keywords_all,test_git_get_keywords_none
+ Test 2 :  test_render_pep440_branch_clean,test_render_pep440_branch_dirty, test_render_pep440_branch_no_tags_clean,
+ test_render_pep440_no_tags_dirty
 
-<Show a patch (diff) or a link to a commit made in your forked repository that shows the instrumented code to gather coverage measurements>
-
-<Provide a screenshot of the coverage results output by the instrumentation>
-
-<Function 2 name>
-
-<Provide the same kind of information provided for Function 1>
+ ![alt text](<Screenshots/Screenshot 2024-06-22 155237.png>)
+ The coverage is 0 for both functions
 
 ## Coverage improvement
 
 ### Individual tests
 
-<The following is supposed to be repeated for each group member>
+#### 3. Barnabas Kalmar
+ 
+ Test 1
+ ![alt text](<Screenshots/Screenshot 2024-06-22 160350.png>)
+ Test 2
+ ![alt text](<Screenshots/Screenshot 2024-06-22 160417.png>)
 
-<Group member name>
+ Before![alt text](<Screenshots/Screenshot 2024-06-22 155237.png>)
 
-<Test 1>
+ After:![alt text](<Screenshots/Screenshot 2024-06-22 143359.png>)
 
-<Show a patch (diff) or a link to a commit made in your forked repository that shows the new/enhanced test>
+  The coverage improved from 0 to 86% for both test functions
 
-<Provide a screenshot of the old coverage results (the same as you already showed above)>
 
-<Provide a screenshot of the new coverage results>
-
-<State the coverage improvement with a number and elaborate on why the coverage is improved>
-
-<Test 2>
-
-<Provide the same kind of information provided for Test 1>
-
-### Overall
-
-<Provide a screenshot of the old coverage results by running an existing tool (the same as you already showed above)>
-
-<Provide a screenshot of the new coverage results by running the existing tool using all test modifications made by the group>
-
-## Statement of individual contributions
-
-<Write what each group member did>
