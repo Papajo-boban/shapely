@@ -47,7 +47,8 @@ coverage html
 ```
 7. **Result**
 
-<img width="1355" alt="Screenshot 2024-06-07 at 15 30 43" src="https://github.com/Papajo-boban/shapely/assets/134519958/f66d2f91-a251-4718-880d-c556f777512e">
+<img width="1385" alt="Screenshot 2024-06-27 at 12 52 35" src="https://github.com/Papajo-boban/shapely/assets/134519958/7f847ccf-91ee-4648-830c-5201271d3ba5">
+
 
 ### Your own coverage tool
 
@@ -179,9 +180,14 @@ Test 2 :  test_render_pep440_branch_clean,test_render_pep440_branch_dirty, test_
 
 ### Overall
 
-<Provide a screenshot of the old coverage results by running an existing tool (the same as you already showed above)>
+**Before:**
 
-<Provide a screenshot of the new coverage results by running the existing tool using all test modifications made by the group>
+<img width="1385" alt="Screenshot 2024-06-27 at 12 52 35" src="https://github.com/Papajo-boban/shapely/assets/134519958/c10b0552-1731-465c-af92-3ff554dd3a0a">
+
+**After:**
+
+<img width="1385" alt="Screenshot 2024-06-27 at 12 53 19" src="https://github.com/Papajo-boban/shapely/assets/134519958/12426f57-4665-4d41-b5a3-7d853ba98c3a">
+
 
 ## Statement of individual contributions
 
