@@ -21,3 +21,11 @@ def save_coverage():
             file.write(f"{branch}: {'True' if hit else 'False'}\n")
 
 save_coverage()
+
+render_git_describe_branches = [False] * 5
+def save_git_render_branches(render_git_describe_branches):
+    with open ("render_git_describe_coverage.txt", "w") as file:
+        for i in range(len(render_git_describe_branches)):
+            file.write(f"branch {i}: {render_git_describe_branches[i]}\n")
+
+save_git_render_branches(render_git_describe_branches)

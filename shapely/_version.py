@@ -644,18 +644,15 @@ def render_git_describe(pieces):
         if pieces["distance"]:
             render_git_describe_branches[2] = True
             save_git_render_branches(render_git_describe_branches)
-            save_render_branches
             rendered += "-%d-g%s" % (pieces["distance"], pieces["short"])
     else:
         render_git_describe_branches[3] = True
         save_git_render_branches(render_git_describe_branches)
-        save_render_branches
         # exception #1
         rendered = pieces["short"]
     if pieces["dirty"]:
         render_git_describe_branches[4] = True
         save_git_render_branches(render_git_describe_branches)
-        save_render_branches
         rendered += "-dirty"
     return rendered
 
